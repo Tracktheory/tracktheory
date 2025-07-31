@@ -121,7 +121,9 @@ export default function Home() {
         {recommendations && (
           <div className="mt-6 bg-gray-800 p-4 rounded-xl text-left whitespace-pre-line">
             <h3 className="text-lg font-bold mb-2">Recommended Mods:</h3>
-            <ReactMarkdown className="text-sm text-gray-300">{recommendations}</ReactMarkdown>
+            <div className="text-sm text-gray-300">
+             <ReactMarkdown>{recommendations}</ReactMarkdown>
+            </div>
           </div>
         )}
       </section>
