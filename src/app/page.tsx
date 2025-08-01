@@ -64,7 +64,7 @@ export default function Home() {
       {/* Header */}
       <header className="p-4 border-b border-gray-700 flex items-center justify-between">
         <div className="flex-1">
-          <Image src="/Tracktheory.svg" alt="TrackTheory Logo" width={50} height={140} className="mx-auto" />
+          <Image src="/Tracktheory.svg" alt="TrackTheory Logo" width={250} height={140} className="mx-auto" />
         </div>
         <div className="hidden md:flex gap-4 items-center text-gray-400 text-sm">
           <input
