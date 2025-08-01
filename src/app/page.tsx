@@ -9,12 +9,13 @@ export default function Home() {
   const [recommendations, setRecommendations] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('engine');
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const make = e.target.make.value;
-    const model = e.target.model.value;
-    const year = e.target.year.value;
-    const goal = e.target.goal.value;
+    const form = e.currentTarget;
+    const make = (form.elements.namedItem('make') as HTMLInputElement).value;
+    const model = (form.elements.namedItem('model') as HTMLInputElement).value;
+    const year = (form.elements.namedItem('year') as HTMLInputElement).value;
+    const goal = (form.elements.namedItem('goal') as HTMLSelectElement).value;
 
     try {
       const res = await fetch('/api/build-advisor', {
@@ -43,12 +44,10 @@ export default function Home() {
 
   const handleNavClick = (item: string) => {
     if (item === 'AI Advisor') {
-      const advisorSection = document.getElementById('advisor');
-      advisorSection?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('advisor')?.scrollIntoView({ behavior: 'smooth' });
     } else if (item === 'Shop' || navItems.includes(item)) {
       setSelectedCategory(item.toLowerCase());
-      const shopSection = document.getElementById('shop');
-      shopSection?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -116,13 +115,16 @@ export default function Home() {
             <option value="street">Street Performance</option>
             <option value="diesel">Towing & Diesel Power</option>
           </select>
-          <button type="submit" className="w-full bg-pink-600 hover:bg-pink-700 p-2 rounded font-bold">Generate Recommendations</button>
+          <button type="submit" className="w-full bg-pink-600 hover:bg-pink-700 p-2 rounded font-bold">
+            Generate Recommendations
+          </button>
         </form>
+
         {recommendations && (
           <div className="mt-6 bg-gray-800 p-4 rounded-xl text-left whitespace-pre-line">
             <h3 className="text-lg font-bold mb-2">Recommended Mods:</h3>
             <div className="text-sm text-gray-300">
-             <ReactMarkdown>{recommendations}</ReactMarkdown>
+              <ReactMarkdown>{recommendations}</ReactMarkdown>
             </div>
           </div>
         )}
